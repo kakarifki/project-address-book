@@ -2,8 +2,8 @@ const contacts = [
   {
     id: 1,
     fullname: "rifki",
-    phone_number: "6289614244937",
-    email: "rifkim91@gmail.com",
+    phone_number: "6289614241442",
+    email: "rifki@gmill.com",
     address: "Setu, Bekasi",
     age: 20,
     tags: "Friends",
@@ -66,4 +66,3 @@ try {
 } finally {
   console.log("Proses Add Data selesai")
 }
-
