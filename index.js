@@ -74,7 +74,8 @@ const numberInput = document.getElementById('numberInput');
 const itemList = document.getElementById('itemList');
 const addButton = document.getElementById('addButton');
 const changeBGButton = document.getElementById('changeBGButton');
-const divSisiKiri = document.getElementById('divSisiKiri')
+const divSisiKiri = document.getElementById('divSisiKiri');
+const changePaddingButton = document.getElementById('changePaddingButton');
 
 const addListItems = () => {
   const itemCount = parseInt(numberInput.value, 10);
@@ -90,7 +91,12 @@ const addListItems = () => {
 }
 
 addButton.addEventListener('click', addListItems)
+
 changeBGButton.addEventListener('click', () => {
   divSisiKiri.classList.toggle('bg-yellow-500');
+})
+
+changePaddingButton.addEventListener('click', () => {
+  divSisiKiri.classList.toggle('p-2');
 })
 })
