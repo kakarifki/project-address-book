@@ -75,11 +75,14 @@ const itemList = document.getElementById('itemList')
 const addButton = document.getElementById('addButton')
 
 const addListItems = () => {
-  const itemCount = numberInput.value;
+  const itemCount = parseInt(numberInput.value, 10);
+  const existingItems = itemList.getElementsByTagName('li').length;
+  console.log(existingItems)
+
 
   for (let i = 1; i <= itemCount; i++) {
     const li = document.createElement("li");
-    li.textContent = `Item ${i}`;
+    li.textContent = `Item ${existingItems + i}`;
     itemList.appendChild(li);
   }
 }
