@@ -76,6 +76,7 @@ const addButton = document.getElementById('addButton');
 const changeBGButton = document.getElementById('changeBGButton');
 const divSisiKiri = document.getElementById('divSisiKiri');
 const changePaddingButton = document.getElementById('changePaddingButton');
+const addressForm = document.getElementById('addressForm')
 
 const addListItems = () => {
   const itemCount = parseInt(numberInput.value, 10);
