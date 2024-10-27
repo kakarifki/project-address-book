@@ -32,8 +32,16 @@ const contacts = [
 ];
 console.log(contacts);
 
-// fungtion untuk menambahkan kontak baru 
-const addContact = (fullname, phone_number, email, address, age, tags, others) => {
+// fungtion untuk menambahkan kontak baru
+const addContact = (
+  fullname,
+  phone_number,
+  email,
+  address,
+  age,
+  tags,
+  others
+) => {
   // Cari id terakhir dalam array dan tambahkan 1
   const lastId = contacts.length ? contacts[contacts.length - 1].id : 0;
   const newId = lastId + 1;
@@ -58,46 +66,100 @@ const addContact = (fullname, phone_number, email, address, age, tags, others) =
   console.log("Daftar kontak terbaru:", contacts);
 };
 
-// const dataBaru = 
+// const dataBaru =
 try {
-  addContact("Dini Nurdini", "628765432123", "dini@gmail.com", "Jombang, Jawa Timur", 25, "Friends", "Orang Jawa Timur")  
+  addContact(
+    "Dini Nurdini",
+    "628765432123",
+    "dini@gmail.com",
+    "Jombang, Jawa Timur",
+    25,
+    "Friends",
+    "Orang Jawa Timur"
+  );
 } catch (error) {
-  console.error("Error Input Data")
+  console.error("Error Input Data");
 } finally {
-  console.log("Proses Add Data selesai")
+  console.log("Proses Add Data selesai");
 }
 
 //DOM
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const numberInput = document.getElementById("numberInput");
+  const itemList = document.getElementById("itemList");
+  const addButton = document.getElementById("addButton");
+  const changeBGButton = document.getElementById("changeBGButton");
+  const divSisiKiri = document.getElementById("divSisiKiri");
+  const changePaddingButton = document.getElementById("changePaddingButton");
+  const addressForm = document.getElementById("addressForm");
+  const outputDiv = document.getElementById("output");
 
-const numberInput = document.getElementById('numberInput');
-const itemList = document.getElementById('itemList');
-const addButton = document.getElementById('addButton');
-const changeBGButton = document.getElementById('changeBGButton');
-const divSisiKiri = document.getElementById('divSisiKiri');
-const changePaddingButton = document.getElementById('changePaddingButton');
-const addressForm = document.getElementById('addressForm')
+  let editingIndex = -1;
 
-const addListItems = () => {
-  const itemCount = parseInt(numberInput.value, 10);
-  const existingItems = itemList.getElementsByTagName('li').length;
-  console.log(existingItems) // Ngecek existing berapa banyak
+  const saveDataToLocalStorage = (data) => {
+    localStorage.setItem("formData", JSON.stringify(data));
+  };
 
+  const addListItems = () => {
+    const itemCount = parseInt(numberInput.value, 10);
+    const existingItems = itemList.getElementsByTagName("li").length;
+    console.log(existingItems); // Ngecek existing berapa banyak
 
-  for (let i = 1; i <= itemCount; i++) {
-    const li = document.createElement("li");
-    li.textContent = `Item ${existingItems + i}`;
-    itemList.appendChild(li);
+    for (let i = 1; i <= itemCount; i++) {
+      const li = document.createElement("li");
+      li.textContent = `Item ${existingItems + i}`;
+      itemList.appendChild(li);
+    }
+  };
+
+  // try {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(addressForm);
+    const nama = formData.get("nama");
+    const alamat = formData.get("alamat");
+
+    const newAddress = { nama, alamat };
+    console.log("newAddress", newAddress);
+    saveDataToLocalStorage(newAddress);
   }
-}
+  // } catch (error) {
+  //   console.log("error")
+  // }
 
-addButton.addEventListener('click', addListItems)
+  function addEditDeleteButtons(li) {
+    const buttonsDiv = document.createElement("div");
 
-changeBGButton.addEventListener('click', () => {
-  divSisiKiri.classList.toggle('bg-yellow-500');
-})
+    const editButton = document.createElement("button");
+    editButton.textContent = "edit";
+    editButton.className = "bg-yellow-500 text-white";
+    editButton.onclick = () => editItem(li);
 
-changePaddingButton.addEventListener('click', () => {
-  divSisiKiri.classList.toggle('p-2');
-})
-})
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "delete";
+    deleteButton.className = "bg-red-500 text-white";
+    deleteButton.onclick = () => deleteItem(li);
+
+    buttonsDiv.appendChild(editButton);
+    buttonsDiv.appendChild(deleteButton);
+  }
+
+  function editItem(li) {
+    const [name, address] = li.firstChild.textContent.split("-");
+  }
+
+  addressForm.addEventListener("submit", handleSubmit);
+  // if (editingIndex === -1)
+  
+  
+
+  addButton.addEventListener("click", addListItems);
+
+  changeBGButton.addEventListener("click", () => {
+    divSisiKiri.classList.toggle("bg-yellow-500");
+  });
+
+  changePaddingButton.addEventListener("click", () => {
+    divSisiKiri.classList.toggle("p-2");
+  });
+});
