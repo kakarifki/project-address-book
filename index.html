@@ -11,12 +11,22 @@
     <!-- <nav>
         <h1>Navbar</h1>
     </nav> -->
-    <div class="bg-red-400 flex">
-        <div class="flex bg-blue-500">
+    <div class="flex">
+        <div class="w-1/4 bg-blue-500 flex-grow">
             <h1 class="">Sisi kiri</h1>
         </div>
-        <div class="bg-green-500">
+        <div class="w-3/4 bg-green-500 flex-grow">
             <h1>Sisi Kanan</h1>
+            <div>
+                <input type="number" id="numberInput" placeholder="Masukkan jumlah item" min="1">
+                <button id="addButton">Tambah List</button>
+            </div>
+            <div>
+                <ul id="itemList">
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ul>
+            </div>
     
         </div>
     </div>

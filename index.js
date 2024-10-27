@@ -66,3 +66,23 @@ try {
 } finally {
   console.log("Proses Add Data selesai")
 }
+
+//DOM
+document.addEventListener('DOMContentLoaded', () => {
+
+const numberInput = document.getElementById('numberInput');
+const itemList = document.getElementById('itemList')
+const addButton = document.getElementById('addButton')
+
+const addListItems = () => {
+  const itemCount = numberInput.value;
+
+  for (let i = 1; i <= itemCount; i++) {
+    const li = document.createElement("li");
+    li.textContent = `Item ${i}`;
+    itemList.appendChild(li);
+  }
+}
+
+addButton.addEventListener('click', addListItems)
+})
