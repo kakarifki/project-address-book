@@ -95,9 +95,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const outputDiv = document.getElementById("output");
 
   let editingIndex = -1;
-
+  // kirim data ke local storage
   const saveDataToLocalStorage = (data) => {
-    localStorage.setItem("formData", JSON.stringify(data));
+    const existingData = JSON.parse(localStorage.getItem("formDataList")) || [];
+    existingData.push(data);
+    localStorage.setItem("formDataList", JSON.stringify(existingData));
+  };
+
+  // load data dari local storage
+  const getDataFromLocalStorage = () => {
+    const storedData = localStorage.getItem("formDataList");
+    return storedData ? JSON.parse(storedData) : [];
+  };
+
+  const displayDataFromLocalStorage = () => {
+    const dataList = getDataFromLocalStorage();
+    // outputDiv.innerHTML = "";
+
+    if (dataList.length > 0) {
+      dataList.forEach((data, index) => {
+        // Tambahkan setiap entri ke dalam output
+        outputDiv.innerHTML += `<p><strong>Data ${index + 1}</strong></p>`;
+        outputDiv.innerHTML += `<p><strong>Nama:</strong> ${data.nama}</p>`;
+        outputDiv.innerHTML += `<p><strong>Alamat:</strong> ${data.alamat}</p><hr>`;
+      });
+    } else {
+      outputDiv.innerHTML = "<p>Data tidak tersedia.</p>";
+    }
   };
 
   const addListItems = () => {
@@ -122,10 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const newAddress = { nama, alamat };
     console.log("newAddress", newAddress);
     saveDataToLocalStorage(newAddress);
+    
+    displayDataFromLocalStorage();
+    addressForm.reset();
   }
   // } catch (error) {
   //   console.log("error")
   // }
+
 
   function addEditDeleteButtons(li) {
     const buttonsDiv = document.createElement("div");
@@ -150,10 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addressForm.addEventListener("submit", handleSubmit);
   // if (editingIndex === -1)
-  
-  
 
   addButton.addEventListener("click", addListItems);
+
+  displayDataFromLocalStorage();
 
   changeBGButton.addEventListener("click", () => {
     divSisiKiri.classList.toggle("bg-yellow-500");
