@@ -71,13 +71,15 @@ try {
 document.addEventListener('DOMContentLoaded', () => {
 
 const numberInput = document.getElementById('numberInput');
-const itemList = document.getElementById('itemList')
-const addButton = document.getElementById('addButton')
+const itemList = document.getElementById('itemList');
+const addButton = document.getElementById('addButton');
+const changeBGButton = document.getElementById('changeBGButton');
+const divSisiKiri = document.getElementById('divSisiKiri')
 
 const addListItems = () => {
   const itemCount = parseInt(numberInput.value, 10);
   const existingItems = itemList.getElementsByTagName('li').length;
-  console.log(existingItems)
+  console.log(existingItems) // Ngecek existing berapa banyak
 
 
   for (let i = 1; i <= itemCount; i++) {
@@ -88,4 +90,7 @@ const addListItems = () => {
 }
 
 addButton.addEventListener('click', addListItems)
+changeBGButton.addEventListener('click', () => {
+  divSisiKiri.classList.toggle('bg-yellow-500');
+})
 })
