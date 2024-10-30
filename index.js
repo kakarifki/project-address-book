@@ -1,14 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addressForm = document.getElementById('addressForm');
     const outputDiv = document.getElementById('content-container');
+    const searchInput = document.getElementById('searchInput');
+
+    // event listener search
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        displayDataFromLocalStorage(query);
+    });
 
     // show data
-    const displayDataFromLocalStorage = () => {
+    const displayDataFromLocalStorage = (query = '') => {
         const dataList = getDataFromLocalStorage();
         outputDiv.innerHTML = '';
+        
+    // Filter dataList berdasarkan query pencarian
+    const filteredDataList = dataList.filter(data => {
+        return (
+            data.fullname.toLowerCase().includes(query) ||
+            data.phone_number.includes(query) ||
+            data.email.toLowerCase().includes(query) ||
+            data.address.toLowerCase().includes(query)
+        );
+    });
 
-        if (dataList.length > 0) {
-            dataList.forEach((data, index) => {
+        if (filteredDataList.length > 0) {
+            filteredDataList.forEach((data, index) => {
                 // Buat div container untuk setiap kontak
                 const contactDiv = document.createElement('div');
                 
@@ -25,18 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Notes:</strong> ${data.notes}</p>
                     <hr>
                 `;
-
-                // event listener clik
-                contactDiv.addEventListener('click', () => {
-                    window.location.href = `/contact-details/?id=${data.id}`;
-                });    
-                
-                // auto add tombol delete
-                const deleteContactBtn = document.createElement('button');
-                deleteContactBtn.textContent = 'Delete Contact';
-
-
-                contactDiv.appendChild(deleteContactBtn); // masih belom ngerti
 
                 // nambahin contactDiv ke dalam outputDiv
                 outputDiv.appendChild(contactDiv);
@@ -74,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addressForm.reset();
     };
 
+    
     // Tambahkan event listener untuk submit form
     addressForm.addEventListener('submit', submitForm);
 
