@@ -35,14 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const deleteContactBtn = document.createElement('button');
                 deleteContactBtn.textContent = 'Delete Contact';
 
-                // event listener click delete
-                deleteContactBtn.addEventListener('click', () => {
-                    deleteContactById(contact.id);
-                });
 
-                contactDiv.appendChild(deleteContactBtn);
+                contactDiv.appendChild(deleteContactBtn); // masih belom ngerti
 
-                // Tambahkan contactDiv ke dalam outputDiv
+                // nambahin contactDiv ke dalam outputDiv
                 outputDiv.appendChild(contactDiv);
             });
         } else {
@@ -50,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Fungsi untuk menangani submit form
+    // Fungsi submit form
     const submitForm = (event) => {
         event.preventDefault();
 
