@@ -9,6 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
         displayDataFromLocalStorage(query);
     });
 
+    // fungsi delete
+    const deleteContactById = (id) => {
+        let contacts = getDataFromLocalStorage();
+        // Filter kontak yang tidak cocok dengan ID yang akan dihapus
+        contacts = contacts.filter(contact => contact.id !== id);
+        
+        // Simpan kembali kontak yang sudah difilter ke localStorage
+        localStorage.setItem('formDataList', JSON.stringify(contacts));
+        
+        // Tampilkan kembali kontak yang ada setelah penghapusan
+        displayDataFromLocalStorage(); // Tampilkan data setelah delete
+    };
+
     // show data
     const displayDataFromLocalStorage = (query = '') => {
         const dataList = getDataFromLocalStorage();
@@ -40,11 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Birthday:</strong> ${data.birthday}</p>
                     <p><strong>Tags:</strong> ${data.tags}</p>
                     <p><strong>Notes:</strong> ${data.notes}</p>
+                    <button data-id="${data.id}" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Delete</button>
                     <hr>
                 `;
 
+                // event listener clik
+                contactDiv.addEventListener('click', () => {
+                    window.location.href = `/contact-details/?id=${data.id}`;
+                });  
+                
                 // nambahin contactDiv ke dalam outputDiv
                 outputDiv.appendChild(contactDiv);
+
+                // event listener delete
+                const deleteBtn = contactDiv.querySelector('button[data-id]');
+                deleteBtn.addEventListener('click', () => {
+                deleteContactById(data.id);
+            });
             });
         } else {
             outputDiv.innerHTML = '<p>Data tidak tersedia.</p>';
