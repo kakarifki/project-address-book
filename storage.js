@@ -29,23 +29,3 @@ const getDataFromLocalStorage = () => {
     }
 };
 
-// Fungsi untuk menampilkan semua data dari localStorage
-const displayDataFromLocalStorage = (outputDiv) => {
-    const dataList = getDataFromLocalStorage();
-    outputDiv.innerHTML = '';
-
-    if (dataList.length > 0) {
-        dataList.forEach((data, index) => {
-            outputDiv.innerHTML += `<p><strong>Contact ${index + 1}</strong></p>`;
-            outputDiv.innerHTML += `<p><strong>Full Name:</strong> ${data.fullname}</p>`;
-            outputDiv.innerHTML += `<p><strong>Phone Number:</strong> ${data.phone_number}</p>`;
-            outputDiv.innerHTML += `<p><strong>Email:</strong> ${data.email}</p>`;
-            outputDiv.innerHTML += `<p><strong>Address:</strong> ${data.address}</p>`;
-            outputDiv.innerHTML += `<p><strong>Birthday:</strong> ${data.birthday}</p>`;
-            outputDiv.innerHTML += `<p><strong>Tags:</strong> ${data.tags}</p>`;
-            outputDiv.innerHTML += `<p><strong>Notes:</strong> ${data.notes}</p><hr>`;
-        });
-    } else {
-        outputDiv.innerHTML = '<p>Data tidak tersedia.</p>';
-    }
-};
