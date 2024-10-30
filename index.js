@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dataList.forEach((data, index) => {
                 // Buat div container untuk setiap kontak
                 const contactDiv = document.createElement('div');
-                contactDiv.classList.add('contact'); // Tambahkan kelas untuk styling jika perlu
-
+                
                 // Masukkan informasi kontak ke dalam contactDiv
                 contactDiv.innerHTML = `
                     <p><strong>Contact ${index + 1}</strong></p>
@@ -30,7 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // event listener clik
                 contactDiv.addEventListener('click', () => {
                     window.location.href = `/contact-details/?id=${data.id}`;
-                 });    
+                });    
+                
+                // auto add tombol delete
+                const deleteContactBtn = document.createElement('button');
+                deleteContactBtn.textContent = 'Delete Contact';
+
+                // event listener click delete
+                deleteContactBtn.addEventListener('click', () => {
+                    deleteContactById(contact.id);
+                });
+
+                contactDiv.appendChild(deleteContactBtn);
 
                 // Tambahkan contactDiv ke dalam outputDiv
                 outputDiv.appendChild(contactDiv);
