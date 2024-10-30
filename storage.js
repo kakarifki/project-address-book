@@ -1,6 +1,7 @@
 // bikin class contact (yang diajarin mas ipung)
 class Contact {
-    constructor(fullname, phone_number, email, address, birthday, tags, notes) {
+    constructor(id, fullname, phone_number, email, address, birthday, tags, notes) {
+        this.id = id;
         this.fullname = fullname;
         this.phone_number = phone_number;
         this.email = email;
