@@ -1,4 +1,5 @@
 const contactDetailsDiv = document.getElementById('contactDetails');
+const deleteContactBtn = document.getElementById('deleteContactBtn');
 
 // search id dari url
 const getContactIdFromUrl = () => {
@@ -32,6 +33,20 @@ const displayContactDetails = () => {
         contactDetailsDiv.innerHTML = '<p>Contact not found.</p>';
     }
 };
+
+// fitur hapus kontak dan langsung kembali ke home
+const deleteContactById = (id) => {
+    const contacts = getDataFromLocalStorage();
+    const updatedContacts = contacts.filter(contact => contact.id !== id);
+    localStorage.setItem('formDataList', JSON.stringify(updatedContacts));
+    window.location.href = '/';
+}
+
+// event listener click delete
+deleteContactBtn.addEventListener('click', () => {
+    const contactId = parseInt(getContactIdFromUrl(), 10);
+    deleteContactById(contactId);
+});
 
 // manggil function
 displayContactDetails();
