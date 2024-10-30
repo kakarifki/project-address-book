@@ -1,36 +1,36 @@
-const contacts = [
-  {
-    id: 1,
-    fullname: "rifki",
-    phone_number: "6289614241442",
-    email: "rifki@gmill.com",
-    address: "Setu, Bekasi",
-    age: 20,
-    tags: "Friends",
-    others: "",
-  },
-  {
-    id: 2,
-    fullname: "Dimas",
-    phone_number: "6289612341243",
-    email: "dimas@gmail.com",
-    address: "Jakarta Timur, DKI Jakarta",
-    age: 21,
-    tags: "Collagues",
-    others: "HRD Staff",
-  },
-  {
-    id: 3,
-    fullname: "Boy Tobing",
-    phone_number: "6281312341234",
-    email: "Boy@gmail.com",
-    address: "Bogor, Jawa Barat",
-    age: 22,
-    tags: "Family",
-    others: "Cousin",
-  },
-];
-console.log(contacts);
+// const contacts = [
+//   {
+//     id: 1,
+//     fullname: "rifki",
+//     phone_number: "6289614241442",
+//     email: "rifki@gmill.com",
+//     address: "Setu, Bekasi",
+//     age: 20,
+//     tags: "Friends",
+//     others: "",
+//   },
+//   {
+//     id: 2,
+//     fullname: "Dimas",
+//     phone_number: "6289612341243",
+//     email: "dimas@gmail.com",
+//     address: "Jakarta Timur, DKI Jakarta",
+//     age: 21,
+//     tags: "Collagues",
+//     others: "HRD Staff",
+//   },
+//   {
+//     id: 3,
+//     fullname: "Boy Tobing",
+//     phone_number: "6281312341234",
+//     email: "Boy@gmail.com",
+//     address: "Bogor, Jawa Barat",
+//     age: 22,
+//     tags: "Family",
+//     others: "Cousin",
+//   },
+// ];
+// console.log(contacts);
 
 // fungtion untuk menambahkan kontak baru
 const addContact = (
