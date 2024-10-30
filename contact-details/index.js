@@ -13,6 +13,20 @@ const getDataFromLocalStorage = () => {
     return data ? JSON.parse(data) : [];
 };
 
+// fungsi menghitung age
+const calculateAge = (birthday) => {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    // Jika belum ulang tahun di tahun ini
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+};
+
 // nampilin data
 const displayContactDetails = () => {
     const contactId = parseInt(getContactIdFromUrl(), 10);
@@ -20,12 +34,15 @@ const displayContactDetails = () => {
     const contact = contacts.find(item => item.id === contactId);
 
     if (contact) {
+
+        const age = calculateAge(contact.birthday);
+        console.log(age)
         contactDetailsDiv.innerHTML = `
             <p><strong>Full Name:</strong> ${contact.fullname}</p>
             <p><strong>Phone Number:</strong> ${contact.phone_number}</p>
             <p><strong>Email:</strong> ${contact.email}</p>
             <p><strong>Address:</strong> ${contact.address}</p>
-            <p><strong>Birthday:</strong> ${contact.birthday}</p>
+            <p><strong>Age:</strong> ${age}</p>
             <p><strong>Tags:</strong> ${contact.tags}</p>
             <p><strong>Notes:</strong> ${contact.notes}</p>
         `;

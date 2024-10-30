@@ -22,6 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
         displayDataFromLocalStorage(); // Tampilkan data setelah delete
     };
 
+    // fungsi menghitung age
+    const calculateAge = (birthday) => {
+        const birthDate = new Date(birthday);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+    
+        // Jika belum ulang tahun di tahun ini
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    };
+
     // show data
     const displayDataFromLocalStorage = (query = '') => {
         const dataList = getDataFromLocalStorage();
@@ -41,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredDataList.forEach((data, index) => {
                 // Buat div container untuk setiap kontak
                 const contactDiv = document.createElement('div');
+
+                // hitung umur
+                const age = calculateAge(data.birthday);
                 
                 // Masukkan informasi kontak ke dalam contactDiv
                 contactDiv.innerHTML = `
@@ -50,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Phone Number:</strong> ${data.phone_number}</p>
                     <p><strong>Email:</strong> ${data.email}</p>
                     <p><strong>Address:</strong> ${data.address}</p>
-                    <p><strong>Birthday:</strong> ${data.birthday}</p>
+                    <p><strong>Age:</strong> ${age}</p>
                     <p><strong>Tags:</strong> ${data.tags}</p>
                     <p><strong>Notes:</strong> ${data.notes}</p>
                     <button data-id="${data.id}" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Delete</button>
@@ -61,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contactDiv.addEventListener('click', () => {
                     window.location.href = `/contact-details/?id=${data.id}`;
                 });  
-                
+
                 // nambahin contactDiv ke dalam outputDiv
                 outputDiv.appendChild(contactDiv);
 
