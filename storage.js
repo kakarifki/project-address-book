@@ -12,10 +12,10 @@ class Contact {
 }
 
 // save data ke local storage
-const saveDataToLocalStorage = (contact) => {
-    const existingData = JSON.parse(localStorage.getItem('contactList')) || [];
-    existingData.push(contact);
-    localStorage.setItem('contactList', JSON.stringify(existingData));
+const saveDataToLocalStorage = (data) => {
+    const existingData = JSON.parse(localStorage.getItem('formDataList')) || [];
+    existingData.push(data);
+    localStorage.setItem('formDataList', JSON.stringify(existingData));
 };
 
 // get data dari local storage (nyoba try catch)

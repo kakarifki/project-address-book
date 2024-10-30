@@ -32,64 +32,43 @@
         </div>
     </div> -->
     <div class="p-4">
-    <form action="" id="addressForm">
-        <div class="flex flex-col">
-            <label for="name">Nama Lengkap</label>
-            <input 
-                type="text" 
-                name="name" 
-                placeholder="Enter Text">
-        </div>
-        <div class="flex flex-col">
-            <label for="phoneNumber">Nomor HP</label>
-            <input 
-                type="tel" 
-                name="phoneNumber" 
-                placeholder="Enter no hp">
-        </div>
-        <div class="flex flex-col">
-            <label for="email">Email</label>
-            <input 
-                type="email" 
-                name="email" 
-                placeholder="enter email">
-        </div>
-        <div class="flex flex-col">
-            <label for="userAddress">Alamat</label>
-            <input 
-                type="text" 
-                name="userAddress" 
-                placeholder="enter alamat">
-        </div>
-        <div class="flex flex-col">
-            <label for="birthday">tanggal lahir</label>
-            <input 
-                type="date" 
-                name="birthday" 
-                placeholder="enter birthday">
-        </div>
-        <div class="flex flex-col">
-            <label for="userTag">Tags</label>
-            <input 
-                type="text" 
-                name="userTag" 
-                placeholder="enter Tag">
-        </div>
-        <div class="flex flex-col">
-            <label for="notes">Notes</label>
-            <input 
-                type="textext" 
-                name="notes" 
-                placeholder="enter catatan">
-        </div>
-        <button type="submit" class="bg-cyan-900">
-            submit
-        </button>
-    </form>
+        <form id="addressForm">
+            <div class="mb-4">
+                <label for="fullname" class="block text-gray-700">Full Name</label>
+                <input type="text" id="fullname" name="fullname" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone_number" class="block text-gray-700">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-gray-700">Address</label>
+                <input type="text" id="address" name="address" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="birthday" class="block text-gray-700">Birthday</label>
+                <input type="date" id="birthday" name="birthday" class="border border-gray-300 p-2 w-full rounded">
+            </div>
+            <div class="mb-4">
+                <label for="tags" class="block text-gray-700">Tags</label>
+                <input type="text" id="tags" name="tags" class="border border-gray-300 p-2 w-full rounded">
+            </div>
+            <div class="mb-4">
+                <label for="notes" class="block text-gray-700">Notes</label>
+                <textarea id="notes" name="notes" class="border border-gray-300 p-2 w-full rounded"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Contact</button>
+        </form>
 </div>
 
     <div id="content-container" class="bg-grey-400">
+        
     </div>
-    <script src="./index.js"></script>
+    <script src="storage.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
