@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addressForm = document.getElementById('addressForm');
-    const outputDiv = document.getElementById('content-container');
+    const contactTableBody = document.getElementById('contactTableBody');
     const searchInput = document.getElementById('searchInput');
 
     // event listener search
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // show data
     const displayDataFromLocalStorage = (query = '') => {
         const dataList = getDataFromLocalStorage();
-        outputDiv.innerHTML = '';
+        contactTableBody.innerHTML = '';
         
     // Filter dataList berdasarkan query pencarian
     const filteredDataList = dataList.filter(data => {
@@ -52,44 +52,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
         if (filteredDataList.length > 0) {
-            filteredDataList.forEach((data, index) => {
-                // Buat div container untuk setiap kontak
-                const contactDiv = document.createElement('div');
+            // filteredDataList.forEach((data, index) => {
+            //     // Buat div container untuk setiap kontak
+            //     const contactDiv = document.createElement('div');
 
-                // hitung umur
-                const age = calculateAge(data.birthday);
+            //     // hitung umur
+            //     const age = calculateAge(data.birthday);
                 
-                // Masukkan informasi kontak ke dalam contactDiv
-                contactDiv.innerHTML = `
-                    <p><strong>Contact ${index + 1}</strong></p>
-                    <p><strong>ID:</strong> ${data.id}</p>
-                    <p><strong>Full Name:</strong> ${data.fullname}</p>
-                    <p><strong>Phone Number:</strong> ${data.phone_number}</p>
-                    <p><strong>Email:</strong> ${data.email}</p>
-                    <p><strong>Address:</strong> ${data.address}</p>
-                    <p><strong>Age:</strong> ${age}</p>
-                    <p><strong>Tags:</strong> ${data.tags}</p>
-                    <p><strong>Notes:</strong> ${data.notes}</p>
-                    <button data-id="${data.id}" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Delete</button>
-                    <hr>
+            //     // Masukkan informasi kontak ke dalam contactDiv
+            //     contactDiv.innerHTML = `
+            //         <p><strong>Contact ${index + 1}</strong></p>
+            //         <p><strong>ID:</strong> ${data.id}</p>
+            //         <p><strong>Full Name:</strong> ${data.fullname}</p>
+            //         <p><strong>Phone Number:</strong> ${data.phone_number}</p>
+            //         <p><strong>Email:</strong> ${data.email}</p>
+            //         <p><strong>Address:</strong> ${data.address}</p>
+            //         <p><strong>Age:</strong> ${age}</p>
+            //         <p><strong>Tags:</strong> ${data.tags}</p>
+            //         <p><strong>Notes:</strong> ${data.notes}</p>
+            //         <button data-id="${data.id}" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Delete</button>
+            //         <hr>
+            //     `;
+
+            filteredDataList.forEach((data) => {
+                const row = document.createElement('tr');
+                row.classList.add('border-b');
+    
+                row.innerHTML = `
+                    <td class="py-2 px-4">${data.fullname}</td>
+                    <td class="py-2 px-4">${data.phone_number}</td>
+                    <td class="py-2 px-4">${data.email}</td>
+                    <td class="py-2 px-4">${data.tags}</td>
+                    <td class="py-2 px-4">
+                        <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400" id="deleteContactBtn-${data.id}">
+                            Delete
+                        </button>
+                    </td>
                 `;
 
                 // event listener clik
-                contactDiv.addEventListener('click', () => {
+                row.addEventListener('click', () => {
                     window.location.href = `/contact-details/?id=${data.id}`;
                 });  
 
-                // nambahin contactDiv ke dalam outputDiv
-                outputDiv.appendChild(contactDiv);
+                // nambahin row ke dalam contactTableBody
+                contactTableBody.appendChild(row);
 
                 // event listener delete
-                const deleteBtn = contactDiv.querySelector('button[data-id]');
-                deleteBtn.addEventListener('click', () => {
+                const deleteBtn = document.getElementById(`deleteContactBtn-${data.id}`);
+            deleteBtn.addEventListener('click', () => {
                 deleteContactById(data.id);
+                displayDataFromLocalStorage(); // Update tampilan tabel
             });
             });
         } else {
-            outputDiv.innerHTML = '<p>Data tidak tersedia.</p>';
+            contactTableBody.innerHTML = '<p>Data tidak tersedia.</p>';
         }
     };
 
