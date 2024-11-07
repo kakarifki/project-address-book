@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const addressForm = document.getElementById('addressForm');
     const contactTableBody = document.getElementById('contactTableBody');
     const searchInput = document.getElementById('searchInput');
+    const addContactBtn = document.getElementById('addContactBtn');
+    const contactModal = document.getElementById('contactModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+
+    // jika diklik add contact muncul dialog
+    addContactBtn.addEventListener('click', () => {
+        contactModal.showModal(); // Open modal
+    });
+
+    // jika diklik cancel maka menutup dan reset form
+    cancelBtn.addEventListener('click', () => {
+        addressForm.reset(); // reset inputs
+        contactModal.close(); // Close modal
+    });
+    
 
     // event listener search
     searchInput.addEventListener('input', () => {
@@ -136,11 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset form setelah submit
         addressForm.reset();
+        contactModal.close();
     };
 
     
     // Tambahkan event listener untuk submit form
     addressForm.addEventListener('submit', submitForm);
+
 
     // Tampilkan semua data saat halaman dimuat
     displayDataFromLocalStorage();

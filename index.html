@@ -7,12 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen space-y-10">
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto p-4 flex justify-center">
     <button id="addContactBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-4">
         Add Contact
     </button>
-    <dialog id="contactModal" class="rounded-lg p-4 bg-white shadow-lg w-1/2">
-    <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
+    <dialog id="contactModal" class="w-11/12 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="text-xl font-semibold mb-4 flex justify-center">Add Contact</h2>
+        <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
         <form id="addressForm">
             <div class="mb-4">
                 <label for="fullname" class="block text-gray-700">Full Name</label>
@@ -65,22 +66,12 @@
                     <th class="py-2 px-4 border-b bg-gray-100">Tags</th>
                     <th class="py-2 px-4 border-b bg-gray-100"></th> <!-- Kolom kosong untuk tombol delete -->
                 </tr>
-            </thead>
-            <tbody id="<table class="min-w-full border-collapse bg-white shadow-lg rounded-lg">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 border-b bg-gray-100">Name</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Phone Number</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Email</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Tags</th>
-                        <th class="py-2 px-4 border-b bg-gray-100"></th> <!-- Kolom kosong untuk tombol delete -->
-                    </tr>
-                </thead>
+            </thead>         
                 <tbody id="contactTableBody">
                     <!-- Data kontak akan ditambahkan di sini -->
                 </tbody>
             </table>
-        </div>">
+        </div>
                 <!-- Data kontak akan ditambahkan di sini -->
             </tbody>
         </table>
