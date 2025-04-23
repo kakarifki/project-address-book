@@ -16,5 +16,5 @@ const getName2 = (nama) => {
     return nama;                // kalo return bisa buat manggil 
 }
 
-fullName = getName2("arjay")
+const fullName = getName2("arjay")
 console.log(fullName)
