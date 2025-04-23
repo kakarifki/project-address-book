@@ -5,6 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const addContactBtn = document.getElementById('addContactBtn');
     const contactModal = document.getElementById('contactModal');
     const cancelBtn = document.getElementById('cancelBtn');
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeAboutBtn = document.getElementById('closeAboutBtn');
+
+    // About modal handlers
+    aboutBtn.addEventListener('click', () => {
+        aboutModal.showModal();
+    });
+
+    closeAboutBtn.addEventListener('click', () => {
+        aboutModal.close();
+    });
+
+    // Close about modal when clicking outside
+    aboutModal.addEventListener('click', (e) => {
+        const dialogDimensions = aboutModal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            aboutModal.close();
+        }
+    });
 
 
     // jika diklik add contact muncul dialog
@@ -55,74 +80,99 @@ document.addEventListener('DOMContentLoaded', () => {
     // show data
     const displayDataFromLocalStorage = (query = '') => {
         const dataList = getDataFromLocalStorage();
+        const tagFilter = document.getElementById('tagFilter').value;
         contactTableBody.innerHTML = '';
         
-    // Filter dataList berdasarkan query pencarian
-    const filteredDataList = dataList.filter(data => {
-        return (
-            data.fullname.toLowerCase().includes(query) ||
-            data.phone_number.includes(query) ||
-            data.email.toLowerCase().includes(query) ||
-            data.address.toLowerCase().includes(query)
-        );
-    });
+        // Filter dataList berdasarkan query pencarian dan tag
+        const filteredDataList = dataList.filter(data => {
+            const matchesSearch = (
+                data.fullname.toLowerCase().includes(query.toLowerCase()) ||
+                data.phone_number.includes(query) ||
+                data.email.toLowerCase().includes(query.toLowerCase()) ||
+                data.address.toLowerCase().includes(query.toLowerCase())
+            );
+            const matchesTag = tagFilter === '' || data.tags === tagFilter;
+            return matchesSearch && matchesTag;
+        });
 
         if (filteredDataList.length > 0) {
-            // filteredDataList.forEach((data, index) => {
-            //     // Buat div container untuk setiap kontak
-            //     const contactDiv = document.createElement('div');
-
-            //     // hitung umur
-            //     const age = calculateAge(data.birthday);
-                
-            //     // Masukkan informasi kontak ke dalam contactDiv
-            //     contactDiv.innerHTML = `
-            //         <p><strong>Contact ${index + 1}</strong></p>
-            //         <p><strong>ID:</strong> ${data.id}</p>
-            //         <p><strong>Full Name:</strong> ${data.fullname}</p>
-            //         <p><strong>Phone Number:</strong> ${data.phone_number}</p>
-            //         <p><strong>Email:</strong> ${data.email}</p>
-            //         <p><strong>Address:</strong> ${data.address}</p>
-            //         <p><strong>Age:</strong> ${age}</p>
-            //         <p><strong>Tags:</strong> ${data.tags}</p>
-            //         <p><strong>Notes:</strong> ${data.notes}</p>
-            //         <button data-id="${data.id}" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Delete</button>
-            //         <hr>
-            //     `;
+            // Sort contacts alphabetically by name
+            filteredDataList.sort((a, b) => a.fullname.localeCompare(b.fullname));
 
             filteredDataList.forEach((data) => {
-                const row = document.createElement('tr');
-                row.classList.add('border-b');
-    
-                row.innerHTML = `
-                    <td class="py-2 px-4">${data.fullname}</td>
-                    <td class="py-2 px-4">${data.phone_number}</td>
-                    <td class="py-2 px-4">${data.email}</td>
-                    <td class="py-2 px-4">${data.tags}</td>
-                    <td class="py-2 px-4">
-                        <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400" id="deleteContactBtn-${data.id}">
+                const card = document.createElement('div');
+                card.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'overflow-hidden', 'hover:shadow-lg', 'transition-shadow', 'duration-300');
+                
+                // Get initials for the avatar
+                const initials = data.fullname
+                    .split(' ')
+                    .map(name => name[0])
+                    .join('')
+                    .toUpperCase();
+
+                // Calculate age if birthday exists
+                const age = data.birthday ? calculateAge(data.birthday) : '';
+                
+                card.innerHTML = `
+                    <div class="p-4">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold text-lg mr-3">
+                                ${initials}
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800">${data.fullname}</h3>
+                                <span class="text-sm text-gray-500">${data.tags || 'No tags'}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <p class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                                ${data.phone_number}
+                            </p>
+                            <p class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                ${data.email}
+                            </p>
+                            ${age ? `
+                            <p class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                ${age} years old
+                            </p>` : ''}
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-100 p-4 bg-gray-50 flex justify-between items-center">
+                        <button class="text-blue-500 hover:text-blue-700 font-medium text-sm focus:outline-none" onclick="window.location.href='/contact-details/?id=${data.id}'">
+                            View Details
+                        </button>
+                        <button class="text-red-500 hover:text-red-700 font-medium text-sm focus:outline-none" id="deleteContactBtn-${data.id}">
                             Delete
                         </button>
-                    </td>
+                    </div>
                 `;
 
-                // event listener clik
-                row.addEventListener('click', () => {
-                    window.location.href = `/contact-details/?id=${data.id}`;
-                });  
+                // Add the card to the container
+                contactTableBody.appendChild(card);
 
-                // nambahin row ke dalam contactTableBody
-                contactTableBody.appendChild(row);
-
-                // event listener delete
+                // Add delete event listener
                 const deleteBtn = document.getElementById(`deleteContactBtn-${data.id}`);
-            deleteBtn.addEventListener('click', () => {
-                deleteContactById(data.id);
-                displayDataFromLocalStorage(); // Update tampilan tabel
-            });
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering the card click
+                    deleteContactById(data.id);
+                    displayDataFromLocalStorage();
+                });
             });
         } else {
-            contactTableBody.innerHTML = '<p>Data tidak tersedia.</p>';
+            contactTableBody.innerHTML = `
+                <div class="col-span-full text-center py-8 text-gray-500">
+                    No contacts found.
+                </div>
+            `;
         }
     };
 
