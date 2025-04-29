@@ -22,9 +22,9 @@ const saveDataToLocalStorage = (data) => {
 // get data dari local storage (nyoba try catch)
 const initializeDummyData = () => {
     const dummyContacts = [
-        new Contact(1, 'John Doe', '08123456789', 'john@example.com', '123 Main St', 'Acme Inc', 'work', 'Important client'),
-        new Contact(2, 'Jane Smith', '08987654321', 'jane@example.com', '456 Oak Ave', 'Tech Corp', 'family', 'Team lead'),
-        new Contact(3, 'Rizal Johnson', '08765432109', 'rizal@example.com', '789 Pine Rd', 'Global LLC', 'friend', 'Marketing manager')
+        new Contact(1, 'John Doe', '08123456789', 'john@example.com', '123 Main St', 'Acme Inc', 'Work', 'Important client'),
+        new Contact(2, 'Jane Smith', '08987654321', 'jane@example.com', '456 Oak Ave', 'Tech Corp', 'Family', 'Team lead'),
+        new Contact(3, 'Rizal Johnson', '08765432109', 'rizal@example.com', '789 Pine Rd', 'Global LLC', 'Friends', 'Marketing manager')
     ];
     localStorage.setItem('formDataList', JSON.stringify(dummyContacts));
 };

@@ -50,6 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         displayDataFromLocalStorage(query);
     });
 
+    // event listener for tag filter
+    document.getElementById('tagFilter').addEventListener('change', () => {
+        displayDataFromLocalStorage(searchInput.value.toLowerCase());
+    });
+
     // fungsi delete
     const deleteContactById = (id) => {
         let contacts = getDataFromLocalStorage();

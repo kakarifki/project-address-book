@@ -93,8 +93,12 @@ function editContact(contact) {
 
         <div class="mb-4">
             <label for="editTags" class="block text-sm font-medium text-gray-700">Tags:</label>
-            <input type="text" id="editTags" value="${contact.tags}" 
-                class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <select id="editTags" class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="">Select a tag</option>
+                <option value="Family" ${contact.tags === 'Family' ? 'selected' : ''}>Family</option>
+                <option value="Friends" ${contact.tags === 'Friends' ? 'selected' : ''}>Friends</option>
+                <option value="Work" ${contact.tags === 'Work' ? 'selected' : ''}>Work</option>
+            </select>
         </div>
 
         <div class="mb-4">
