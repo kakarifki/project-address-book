@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const filteredDataList = dataList.filter(data => {
             const matchesSearch = (
                 data.fullname.toLowerCase().includes(query.toLowerCase()) ||
-                data.phone_number.includes(query) ||
+                data.phone_number.toLowerCase().includes(query.toLowerCase()) ||
                 data.email.toLowerCase().includes(query.toLowerCase()) ||
                 data.address.toLowerCase().includes(query.toLowerCase())
             );
