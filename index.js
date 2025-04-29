@@ -122,7 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </svg>
                                 ${data.email}
                             </p>
-                            
+                            <p class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                                ${data.company || 'No company'}
+                            </p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100 p-4 bg-gray-50 flex justify-between items-center">
@@ -164,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone_number = document.getElementById('phone_number').value;
         const email = document.getElementById('email').value;
         const address = document.getElementById('address').value;
+        const company = document.getElementById('company').value;
 
         const tags = document.getElementById('tags').value;
         const notes = document.getElementById('notes').value;
@@ -173,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newId = contacts.length ? contacts[contacts.length - 1].id + 1 : 1;
 
         // Buat objek Contact dan simpan ke localStorage
-        const newContact = new Contact(newId, fullname, phone_number, email, address, birthday, tags, notes);
+        const newContact = new Contact(newId, fullname, phone_number, email, address, company, tags, notes);
         saveDataToLocalStorage(newContact);
 
         // Tampilkan data terbaru
