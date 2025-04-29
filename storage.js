@@ -1,12 +1,12 @@
 // bikin class contact (yang diajarin mas ipung)
 class Contact {
-    constructor(id, fullname, phone_number, email, address, birthday, tags, notes) {
+    constructor(id, fullname, phone_number, email, address, company, tags, notes) {
         this.id = id;
         this.fullname = fullname;
         this.phone_number = phone_number;
         this.email = email;
         this.address = address;
-        this.birthday = birthday;
+        this.company = company;
         this.tags = tags;
         this.notes = notes;
     }
@@ -22,9 +22,9 @@ const saveDataToLocalStorage = (data) => {
 // get data dari local storage (nyoba try catch)
 const initializeDummyData = () => {
     const dummyContacts = [
-        new Contact(1, 'John Doe', '08123456789', 'john@example.com', '123 Main St', '1990-05-15', 'work', 'Important client'),
-        new Contact(2, 'Jane Smith', '08987654321', 'jane@example.com', '456 Oak Ave', '1985-11-22', 'family', 'Birthday in November'),
-        new Contact(3, 'Bob Johnson', '08765432109', 'bob@example.com', '789 Pine Rd', '1978-03-08', 'friend', 'Likes fishing')
+        new Contact(1, 'John Doe', '08123456789', 'john@example.com', '123 Main St', 'Acme Inc', 'work', 'Important client'),
+        new Contact(2, 'Jane Smith', '08987654321', 'jane@example.com', '456 Oak Ave', 'Tech Corp', 'family', 'Team lead'),
+        new Contact(3, 'Rizal Johnson', '08765432109', 'rizal@example.com', '789 Pine Rd', 'Global LLC', 'friend', 'Marketing manager')
     ];
     localStorage.setItem('formDataList', JSON.stringify(dummyContacts));
 };
