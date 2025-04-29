@@ -63,19 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayDataFromLocalStorage(); // Tampilkan data setelah delete
     };
 
-    // fungsi menghitung age
-    const calculateAge = (birthday) => {
-        const birthDate = new Date(birthday);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-    
-        // Jika belum ulang tahun di tahun ini
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
-    };
+
 
     // show data
     const displayDataFromLocalStorage = (query = '') => {
@@ -110,9 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     .join('')
                     .toUpperCase();
 
-                // Calculate age if birthday exists
-                const age = data.birthday ? calculateAge(data.birthday) : '';
-                
                 card.innerHTML = `
                     <div class="p-4">
                         <div class="flex items-center mb-4">
@@ -137,13 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </svg>
                                 ${data.email}
                             </p>
-                            ${age ? `
-                            <p class="flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                                ${age} years old
-                            </p>` : ''}
+                            
                         </div>
                     </div>
                     <div class="border-t border-gray-100 p-4 bg-gray-50 flex justify-between items-center">
@@ -185,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone_number = document.getElementById('phone_number').value;
         const email = document.getElementById('email').value;
         const address = document.getElementById('address').value;
-        const birthday = document.getElementById('birthday').value;
+
         const tags = document.getElementById('tags').value;
         const notes = document.getElementById('notes').value;
 

@@ -13,19 +13,7 @@ const getDataFromLocalStorage = () => {
     return data ? JSON.parse(data) : [];
 };
 
-// fungsi menghitung age
-const calculateAge = (birthday) => {
-    const birthDate = new Date(birthday);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
 
-    // Jika belum ulang tahun di tahun ini
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
-};
 
 // nampilin data
 const displayContactDetails = () => {
@@ -35,14 +23,11 @@ const displayContactDetails = () => {
 
     if (contact) {
 
-        const age = calculateAge(contact.birthday);
-        console.log(age)
         contactDetailsDiv.innerHTML = `
             <p><strong>Full Name:</strong> ${contact.fullname}</p>
             <p><strong>Phone Number:</strong> ${contact.phone_number}</p>
             <p><strong>Email:</strong> ${contact.email}</p>
             <p><strong>Address:</strong> ${contact.address}</p>
-            <p><strong>Age:</strong> ${age}</p>
             <p><strong>Tags:</strong> ${contact.tags}</p>
             <p><strong>Notes:</strong> ${contact.notes}</p>
             <button id="deleteContactBtn" class="px-3 py-1 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Delete Contact</button>
@@ -107,12 +92,6 @@ function editContact(contact) {
         </div>
 
         <div class="mb-4">
-            <label for="editBirthday" class="block text-sm font-medium text-gray-700">Birthday:</label>
-            <input type="date" id="editBirthday" value="${contact.birthday}" 
-                class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        </div>
-
-        <div class="mb-4">
             <label for="editTags" class="block text-sm font-medium text-gray-700">Tags:</label>
             <input type="text" id="editTags" value="${contact.tags}" 
                 class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -144,7 +123,7 @@ function editContact(contact) {
         contact.phone_number = document.getElementById('editPhoneNumber').value;
         contact.email = document.getElementById('editEmail').value;
         contact.address = document.getElementById('editAddress').value;
-        contact.birthday = document.getElementById('editBirthday').value;
+
         contact.tags = document.getElementById('editTags').value;
         contact.notes = document.getElementById('editNotes').value;
 
